@@ -1,13 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+ // Contexts
+ import { MenuProvider } from './contexts/menu.context';
+
+// Pages  
+import AddHomework from './pages/AddHomework';
+import Login from './pages/Login';
+import ViewHomework from './pages/ViewHomework';
+
+
+import Header from './components/Header';
+import OCMenu from './components/OffCanvasMenu';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+  <Router>
+  <MenuProvider>
+    <Header />
+    <OCMenu />
+    <Routes>
+          <Route index element={<App />} />          
+          <Route path="login" element={<Login />} />
+          <Route path="addhomework" element={<AddHomework />} />
+          <Route path="viewhomework" element={<ViewHomework />} />          
+        </Routes>
+    
+    </MenuProvider>
+    </Router>
   </React.StrictMode>
 );
 
