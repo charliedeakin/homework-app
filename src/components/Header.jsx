@@ -11,7 +11,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { MenuContext } from "./../contexts/menu.context";
 
-
 export default function Header() {
   const { toggle } = useContext(MenuContext);
   return (
@@ -28,7 +27,7 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h3" component="div" sx={{ flexGrow: 1 }}>
             Homework House
           </Typography>
           <Button color="inherit">Login</Button>

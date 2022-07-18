@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { HomeworkContext } from "../../contexts/homework.context";
 
 const schema = yup.object().shape({
   subject: yup.string(),
@@ -15,7 +17,10 @@ const defaultValues = {
   task: "",
 };
 
-export default function MyForm() {
+export default function HomeworkForm() {
+  let navigate = useNavigate();
+  const { addHomework } = useContext(HomeworkContext);
+
   const { register, handleSubmit, reset, formState } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -26,13 +31,15 @@ export default function MyForm() {
 
   const submitFn = (values) => {
     console.log(values);
+    addHomework(values);
     reset();
+    navigate("/viewhomework");
   };
 
   return (
     <form onSubmit={handleSubmit(submitFn)}>
       <div>
-        <label htmlFor="subject">Subject</label>
+        <label htmlFor="subject">Subject: </label>
         <input
           type="text"
           subject="subject"
@@ -46,7 +53,7 @@ export default function MyForm() {
         )}
       </div>
       <div>
-        <label htmlFor="title">Title</label>
+        <label htmlFor="title">Title: </label>
         <input type="text" title="title" id="title" {...register("title")} />
         {errors.title && (
           <label htmlFor="title" role="alert" className="error">
@@ -55,7 +62,7 @@ export default function MyForm() {
         )}
       </div>
       <div>
-        <label htmlFor="task">Task</label>
+        <label htmlFor="task">Task: </label>
         <input type="text" name="task" id="task" {...register("task")} />
         {errors.task && (
           <label htmlFor="task" role="alert" className="error">
