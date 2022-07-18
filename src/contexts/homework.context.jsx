@@ -2,60 +2,58 @@ import React, { createContext, useState } from "react";
 import { nanoid } from "nanoid";
 
 export const HomeworkContext = createContext({
-  homework: [],
+  homeworks: [],
   addHomework: () => {},
   updateHomework: () => {},
   removeHomework: () => {},
 });
 
 export const HomeworkProvider = ({ children }) => {
-  const [homework, setHomework] = useState([
+  let [homeworks, setHomeworks] = useState([
     
   ]);
 
-  const addHomework = (values) => {
-    values._id = nanoid();
-    setHomework([...homework, values]);
+  const addHomework = (data) => {
+    data._id = nanoid();
+    setHomeworks = ([...homeworks, data]);
   };
+
 
   const updateHomework = (id, updates) => {
-    // Get index
-    const index = homework.findIndex((homework) => homework._id === id);
-    // Get actual homework
-    const oldHomework = homework[index];
+    const index = homeworks.findIndex((homework) => homework._id === id);
+
+    const oldHomework = homeworks[index];
 
     let newHomework = {
-      ...oldHomework,
-      ...updates,
+        ...oldHomework,
+        ...updates,
     };
 
-    // recreate the homework array
-    const updatedHomework = [
-      ...homework.slice(0, index),
-      newHomework,
-      ...homework.slice(index + 1),
+    const updatedHomeworks = [
+        ...homeworks.slice(0, index),
+        newHomework,
+        ...homeworks.slice(index +1),
     ];
 
-    setHomework(updatedHomework);
+    setHomeworks(updatedHomeworks);
   };
 
-  const removeHomework = (id) => {
-    // Get index
-    const index = homework.findIndex((homework) => homework._id === id);
 
-    // recreate the homework array
-    const updatedHomework = [
-      ...homework.slice(0, index),
-      ...homework.slice(index + 1),
+  const removeHomework = (id) => {
+    const index = homeworks.findIndex((homework) => homework._id === id);
+    
+    const updatedHomeworks = [
+        ...homeworks.slice(0, index),        
+        ...homeworks.slice(index +1),
     ];
 
-    setHomework(updatedHomework);
+    setHomeworks(updatedHomeworks);
   };
 
   return (
     <HomeworkContext.Provider
       value={{
-        homework,
+        homeworks,
         addHomework,
         updateHomework,
         removeHomework,

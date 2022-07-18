@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
  // Contexts
  import { MenuProvider } from './contexts/menu.context';
+ import { HomeworkProvider } from './contexts/homework.context';
 
 // Pages  
 import AddHomework from './pages/AddHomework';
@@ -22,6 +23,7 @@ root.render(
   <React.StrictMode>
   <Router>
   <MenuProvider>
+  <HomeworkProvider>
     <Header />
     <OCMenu />
     <Routes>
@@ -30,7 +32,7 @@ root.render(
           <Route path="addhomework" element={<AddHomework />} />
           <Route path="viewhomework" element={<ViewHomework />} />          
         </Routes>
-    
+    </HomeworkProvider>
     </MenuProvider>
     </Router>
   </React.StrictMode>

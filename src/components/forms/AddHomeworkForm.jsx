@@ -29,9 +29,9 @@ export default function HomeworkForm() {
 
   const { isDirty, isValid, isSubmitting, errors } = formState;
 
-  const submitFn = (values) => {
-    console.log(values);
-    addHomework(values);
+  const submitFn = (data) => {
+    console.log(data);
+    addHomework(data);
     reset();
     navigate("/viewhomework");
   };

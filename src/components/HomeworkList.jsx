@@ -5,17 +5,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { HomeworkContext } from "./../contexts/homework.context";
 
 function HomeworkList() {
-  const { homework, removeHomework } = useContext(HomeworkContext);
+  const { homeworks, removeHomework } = useContext(HomeworkContext);
 
-  if (homework.length === 0) return <p>You don't have any homework! 🥳 </p>;
+  if (homeworks.length === 0) return <p>You don't have any homework! 🥳 </p>;
 
   return (
     <ul>
-      {homework.map(({ subject, title, task, _id }) => (
+      {homeworks.map(({ subject, title, task, _id }) => (
         <li key={_id}>
-          {subject}, 
-          {title},
-          {task}
+          {subject},{title},{task}
           <IconButton aria-label="delete" onClick={() => removeHomework(_id)}>
             <DeleteIcon />
           </IconButton>
