@@ -13,7 +13,9 @@ function HomeworkList() {
     <ul>
       {homeworks.map(({ subject, title, task, _id }) => (
         <li key={_id}>
-          {subject},{title},{task}
+          {subject},
+          {title},
+          {task},
           <IconButton aria-label="delete" onClick={() => removeHomework(_id)}>
             <DeleteIcon />
           </IconButton>

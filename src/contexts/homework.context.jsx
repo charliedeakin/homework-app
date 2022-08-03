@@ -10,14 +10,13 @@ export const HomeworkContext = createContext({
 
 export const HomeworkProvider = ({ children }) => {
   let [homeworks, setHomeworks] = useState([
-    
+    // { _id:1, subject: 'History', title: '8 mark question', task: 'complete 8 mark question'}
   ]);
 
   const addHomework = (data) => {
     data._id = nanoid();
-    setHomeworks = ([...homeworks, data]);
+    setHomeworks([...homeworks, data]);
   };
-
 
   const updateHomework = (id, updates) => {
     const index = homeworks.findIndex((homework) => homework._id === id);
@@ -25,26 +24,25 @@ export const HomeworkProvider = ({ children }) => {
     const oldHomework = homeworks[index];
 
     let newHomework = {
-        ...oldHomework,
-        ...updates,
+      ...oldHomework,
+      ...updates,
     };
 
     const updatedHomeworks = [
-        ...homeworks.slice(0, index),
-        newHomework,
-        ...homeworks.slice(index +1),
+      ...homeworks.slice(0, index),
+      newHomework,
+      ...homeworks.slice(index + 1),
     ];
 
     setHomeworks(updatedHomeworks);
   };
 
-
   const removeHomework = (id) => {
     const index = homeworks.findIndex((homework) => homework._id === id);
-    
+
     const updatedHomeworks = [
-        ...homeworks.slice(0, index),        
-        ...homeworks.slice(index +1),
+      ...homeworks.slice(0, index),
+      ...homeworks.slice(index + 1),
     ];
 
     setHomeworks(updatedHomeworks);
